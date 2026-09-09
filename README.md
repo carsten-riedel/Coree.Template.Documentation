@@ -17,6 +17,8 @@ The versioned folder can then be used as an isolated target for testing the
 agent bootstrap prompt. Generated version folders are local test workspaces
 and are ignored by Git.
 
+Product maintenance rules are defined in [`src/AGENTS.md`](src/AGENTS.md).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
