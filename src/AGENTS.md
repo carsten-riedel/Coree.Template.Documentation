@@ -7,6 +7,14 @@ This file governs product development. Keep build, editing, testing, and
 commit rules here. Put only consumer-facing bootstrap and documentation rules
 inside `DocTemplate.html`.
 
+## Product boundary
+
+`DocTemplate.html` is executed by a consuming agent; it does not maintain
+itself. Never place developer workflow in the product. Instructions for
+editing, reviewing, versioning, building, testing, or committing the source
+belong only in this file. Before committing, verify that every product
+instruction serves the consuming agent.
+
 ## Read before and after editing
 
 Read `DocTemplate.html` completely before changing it. Start with one
