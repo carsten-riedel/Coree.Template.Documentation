@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="2.0.0">
+  <meta name="documentation-template-version" content="2.0.1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -57,7 +57,7 @@ Create every page by copying `<template-file>` and replacing only the Markdown i
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="2.0.0">
+  <meta name="documentation-template-version" content="2.0.1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -366,6 +366,7 @@ Symbols also work in concise callouts:
 ### Use code, diagrams, and links deliberately
 
 - Use fenced code blocks with the exact language identifier. The common Highlight.js browser build covers broadly useful languages including Bash/shell, C, C++, C#, CSS, JavaScript, JSON, Markdown, SQL, XML, and YAML. The packaged extra grammars add PowerShell and DOS/CMD.
+- In fenced code examples, keep placeholders such as `<placeholder>` literal. Do not HTML-encode the angle brackets; the Markdown renderer escapes code output.
 - Prefer identifiers such as `powershell`, `bash`, `cmd`, `csharp`, `json`, and `xml`; do not label executable code as plain text.
 - Local GitHub light and dark themes follow `prefers-color-scheme`. Copy-button typography inherits the code-block font and size.
 - Use a fenced `mermaid` block only when a diagram makes a relationship or sequence clearer than short prose. Mermaid runs with `securityLevel: 'strict'`.
