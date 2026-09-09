@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="2.0.1">
+  <meta name="documentation-template-version" content="3.0.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -57,7 +57,7 @@ Create every page by copying `<template-file>` and replacing only the Markdown i
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="2.0.1">
+  <meta name="documentation-template-version" content="3.0.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -152,7 +152,13 @@ This preflight is read-only and must leave no files, configuration, downloads, o
 2. Copy `<template-file>` to `index.html`. Replace only its embedded Markdown with this deliberately minimal content:
 
 ```markdown
-# Documentation
+# Documentation overview
+
+Browse the available documentation pages below.
+
+## Contents
+
+<div data-documentation-toc></div>
 ```
 
 3. Create the `documentation/css`, `documentation/js`, `vendor/css`, `vendor/css/fonts`, `vendor/js`, and `vendor/licenses` directories shown above.
@@ -392,7 +398,7 @@ printf '%s\n' "Documentation is ready."
 
 ## Maintain the page array
 
-Every HTML page must have exactly one object in the `pages` array in `documentation/js/documentation.pages.js`. The array order is the Documentation menu order. Initial bootstrap keeps exactly the `index.html` and `<template-file>` entries shown below.
+Every HTML page must have exactly one object in the `pages` array in `documentation/js/documentation.pages.js`. The array order is the Documentation menu order. The `index.html` contents list is generated from this array; do not maintain a second page list in its Markdown. Initial bootstrap keeps exactly the `index.html` and `<template-file>` entries shown below.
 
 | Property | Meaning |
 | --- | --- |
@@ -764,7 +770,7 @@ blockquote p {
     brand: 'Documentation',
     brandIcon: 'bi-journal-text',
     pages: [
-      { path: 'index.html', label: 'Home', title: 'Documentation', icon: 'bi-house-door' },
+      { path: 'index.html', label: 'Home', title: 'Documentation overview', icon: 'bi-house-door' },
       { path: '<template-file>', label: 'Template', title: 'Documentation template', icon: 'bi-file-earmark-code' }
     ],
     onlineLinks: []
@@ -964,6 +970,27 @@ Available icons come from the vendored Bootstrap Icons font. Prefer a simple, re
     });
   }
 
+  function renderDocumentationToc(target, config) {
+    var toc = target.querySelector('[data-documentation-toc]');
+    var currentPage = getCurrentPageName().toLowerCase();
+    if (!toc) {
+      return;
+    }
+
+    var list = createElement('ul');
+    Array.prototype.forEach.call(config.pages, function (page) {
+      if (String(page.path).toLowerCase() === currentPage) {
+        return;
+      }
+      var item = createElement('li');
+      var link = createElement('a', null, page.title || page.label || page.path);
+      link.href = './' + page.path;
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+    toc.appendChild(list);
+  }
+
   function restoreEscapedHtmlExamples(target) {
     var escapedClosingTag = '<\\/script>';
     var closingTag = '</scr' + 'ipt>';
@@ -1117,6 +1144,7 @@ Available icons come from the vendored Bootstrap Icons font. Prefer a simple, re
       target.innerHTML = window.marked.parse(source.textContent.trim(), {
         gfm: true
       });
+      renderDocumentationToc(target, config);
       restoreEscapedHtmlExamples(target);
       addHeadingAnchors(target);
       applyBootstrapContentStyles(target);
@@ -1168,6 +1196,7 @@ The project-owned `documentation.*` files remain visibly distinct from these ven
 - Confirm no `.documentation-vendor`, `node_modules`, package manifest, lock file, downloaded archive, validation-tool installation, or task-created browser profile remains in the repository or at the recorded temporary path.
 - When capability preflight established supported local-file browser access, open `index.html` directly from a path beginning with `file:` and confirm it renders with networking disabled. Otherwise record both checks as unavailable and use the static checks below; no server is allowed as a substitute.
 - Switch between `index.html` and `<template-file>`; confirm each current page is active and both registered pages appear exactly once.
+- On `index.html`, confirm the generated Contents list links to `<template-file>` exactly once and does not link to itself.
 - If real optional online links were explicitly configured later, confirm they are under the separate Online menu and open a new tab. Otherwise this check is not applicable.
 - Confirm the navbar remains usable at desktop and mobile widths.
 - Confirm light and dark modes preserve readable colors and visible icons.
