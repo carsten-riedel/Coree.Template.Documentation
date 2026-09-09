@@ -48,14 +48,15 @@ if ($templateVersion -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-
 }
 
 $sourceRoot = [System.IO.Path]::GetFullPath($PSScriptRoot)
-$targetDirectory = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot $templateVersion))
+$versionDirectory = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot $templateVersion))
 $requiredPrefix = $sourceRoot + [System.IO.Path]::DirectorySeparatorChar
-if (-not $targetDirectory.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-    throw "The resolved target directory is outside the source folder: $targetDirectory"
+if (-not $versionDirectory.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw "The resolved version directory is outside the source folder: $versionDirectory"
 }
 
-New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
-$targetPath = Join-Path $targetDirectory $FileName
+$workspaceDirectory = Join-Path $versionDirectory 'workspace'
+New-Item -ItemType Directory -Path $workspaceDirectory -Force | Out-Null
+$targetPath = Join-Path $workspaceDirectory $FileName
 Copy-Item -LiteralPath $templatePath -Destination $targetPath -Force
 
 $sourceHash = (Get-FileHash -LiteralPath $templatePath -Algorithm SHA256).Hash
@@ -64,5 +65,10 @@ if ($sourceHash -ne $targetHash) {
     throw "The copied template does not match the source: $targetPath"
 }
 
+$promptPath = Join-Path $versionDirectory 'prompt.md'
+$prompt = "Read the complete file `"$targetPath`" with one whole-file read, then execute the initial bootstrap instructions it contains. Treat its directory as the documentation root, complete the validation checklist, remove temporary acquisition artifacts, report the result, and stop. Do not author additional documentation."
+[System.IO.File]::WriteAllText($promptPath, $prompt + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
+
 Write-Output "Template version: $templateVersion"
 Write-Output "Test copy: $targetPath"
+Write-Output "Prompt: $promptPath"

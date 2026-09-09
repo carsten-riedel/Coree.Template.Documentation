@@ -56,10 +56,11 @@ Bump the version for every product change before building a test folder.
 ## Build and test
 
 Run `./buildtestingfolder.ps1`. It reads the live version, creates the
-versioned test copy, and verifies it by SHA-256. Use `-FileName Docs.html` to
-test an alternative initial name. Versioned folders are ignored local
-workspaces. Run the bootstrap prompt against the copy and validate the result
-using the checklist inside the product.
+versioned test copy under `./<version>/workspace`, verifies it by SHA-256, and
+writes `./<version>/prompt.md` with the artifact's absolute path. Use
+`-FileName Docs.html` to test an alternative initial name. Copy the generated
+prompt into the target agent and validate its result using the product
+checklist. Versioned folders are ignored local workspaces.
 
 ## Commits
 

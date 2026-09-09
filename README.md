@@ -12,10 +12,9 @@ local assets before viewing the finished site in a browser.
 ## Build a test folder
 
 Run `src/buildtestingfolder.ps1` to read the template version from the HTML
-metadata and copy the current template to `src/<version>/DocTemplate.html`.
-The versioned folder can then be used as an isolated target for testing the
-agent bootstrap prompt. Generated version folders are local test workspaces
-and are ignored by Git.
+metadata and create `src/<version>/workspace/<filename>`. It also writes a
+copy-ready `src/<version>/prompt.md` containing the artifact's absolute path.
+Generated version folders are local test workspaces and are ignored by Git.
 
 Pass an alternative initial name when testing filename-independent bootstrap:
 `src/buildtestingfolder.ps1 -FileName Documentation.html`.
