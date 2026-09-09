@@ -4,3 +4,5 @@
 4) notieren print linebreaks ggf. bei jedem # ## ### etc einsetzen sofern über dina4 etc andere formate siteoverflow, frage wie wird das bei print documenten generell gehandhabt
 5) copy button visibility e.g. code fences $documentationVendorStage = Join-Path ([System.IO.Path]::GetTempPath()) ("documentation-
 6) AGENTS.md to MAINTAINER_RULES.md rename
+
+7) Version 5 Ziele ## Future documentation writing guide, sollte vom ort ablage her dedicated schreiben (e.g. how is facing this docs) können ggf. initals docu bootstrap
