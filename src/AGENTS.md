@@ -26,6 +26,14 @@ After every edit, read the complete file again with a whole-file command.
 Sanity-check the live shell, canonical shell, instructions, embedded payloads,
 required output, and validation rules together before building or committing.
 
+## Change impact
+
+Before editing, identify the change's blast radius across the live shell,
+canonical shell, instructions, payloads, generated files, validation, version,
+and build workflow. Update every affected contract while keeping the change
+small. During the whole-file sanity read, verify both the intended effects and
+unintended consequences.
+
 ## Editing
 
 - Keep rules short, direct, and platform-neutral.
