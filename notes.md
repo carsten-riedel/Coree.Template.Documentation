@@ -3,3 +3,4 @@
 3) auch notieren hier macht sowas wie author auch noch sinn e.g. \<meta name="documentation-template-version" content="3.0.0"> ein meta tag wir sind mits da kann jeder seins raus bringen oder forken
 4) notieren print linebreaks ggf. bei jedem # ## ### etc einsetzen sofern über dina4 etc andere formate siteoverflow, frage wie wird das bei print documenten generell gehandhabt
 5) copy button visibility e.g. code fences $documentationVendorStage = Join-Path ([System.IO.Path]::GetTempPath()) ("documentation-
+6) AGENTS.md to MAINTAINER_RULES.md rename
