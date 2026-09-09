@@ -56,14 +56,15 @@ Bump the version for every product change before building a test folder.
 ## Build and test
 
 Run `./buildtestingfolder.ps1`. It reads the live version, creates the
-versioned test copy under `./<version>/workspace`, verifies it by SHA-256, and
-writes `./<version>/prompt.md` with the artifact's absolute path. Use
-`-FileName Docs.html` to test an alternative initial name. Copy the generated
-prompt into the target agent and validate its result using the product
-checklist. Versioned folders are ignored local workspaces.
+versioned release baseline under
+`./releases/<version>/workspace/Documentation.html`, verifies it by SHA-256,
+and writes an ignored `prompt.md` with the artifact's absolute path. Commit the
+baseline so older product versions remain reproducible. Prompts and files
+materialized by test agents stay ignored. Use `-FileName Docs.html` for an
+isolated `workspace-Docs` test of an alternative initial name.
 
 ## Commits
 
-Commit and push after each coherent, verified product change. Do not commit
-generated test folders or mix unfinished work into a product commit. Leave the
-tracked working tree clean after pushing.
+Commit and push after each coherent, verified product change, including its
+release baseline. Do not commit prompts, materialized test output, or unfinished
+work. Leave the tracked working tree clean after pushing.

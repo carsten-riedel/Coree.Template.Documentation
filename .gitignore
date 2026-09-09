@@ -1,2 +1,6 @@
-# Local, versioned bootstrap test workspaces
-/src/[0-9]*.[0-9]*.[0-9]*/
+# Versioned release baselines; prompts and materialized test output stay local.
+/src/releases/*/*
+!/src/releases/*/*.html
+!/src/releases/*/workspace/
+/src/releases/*/workspace/*
+!/src/releases/*/workspace/Documentation.html

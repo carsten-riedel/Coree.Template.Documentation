@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$FileName = 'DocTemplate.html'
+    [string]$FileName = 'Documentation.html'
 )
 
 Set-StrictMode -Version Latest
@@ -48,13 +48,22 @@ if ($templateVersion -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-
 }
 
 $sourceRoot = [System.IO.Path]::GetFullPath($PSScriptRoot)
-$versionDirectory = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot $templateVersion))
+$releasesRoot = [System.IO.Path]::GetFullPath((Join-Path $sourceRoot 'releases'))
 $requiredPrefix = $sourceRoot + [System.IO.Path]::DirectorySeparatorChar
-if (-not $versionDirectory.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+if (-not $releasesRoot.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw "The resolved releases directory is outside the source folder: $releasesRoot"
+}
+
+$versionDirectory = [System.IO.Path]::GetFullPath((Join-Path $releasesRoot $templateVersion))
+$releasePrefix = $releasesRoot + [System.IO.Path]::DirectorySeparatorChar
+if (-not $versionDirectory.StartsWith($releasePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
     throw "The resolved version directory is outside the source folder: $versionDirectory"
 }
 
-$workspaceDirectory = Join-Path $versionDirectory 'workspace'
+$baseName = [System.IO.Path]::GetFileNameWithoutExtension($FileName)
+$isReleaseBaseline = $FileName -ieq 'Documentation.html'
+$workspaceName = if ($isReleaseBaseline) { 'workspace' } else { "workspace-$baseName" }
+$workspaceDirectory = Join-Path $versionDirectory $workspaceName
 New-Item -ItemType Directory -Path $workspaceDirectory -Force | Out-Null
 $targetPath = Join-Path $workspaceDirectory $FileName
 Copy-Item -LiteralPath $templatePath -Destination $targetPath -Force
@@ -65,7 +74,8 @@ if ($sourceHash -ne $targetHash) {
     throw "The copied template does not match the source: $targetPath"
 }
 
-$promptPath = Join-Path $versionDirectory 'prompt.md'
+$promptName = if ($isReleaseBaseline) { 'prompt.md' } else { "prompt-$baseName.md" }
+$promptPath = Join-Path $versionDirectory $promptName
 $prompt = "Read the file `"$targetPath`" and execute the instructions it contains. Do nothing else."
 [System.IO.File]::WriteAllText($promptPath, $prompt + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
 
