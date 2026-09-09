@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="1.0.1">
+  <meta name="documentation-template-version" content="1.1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -17,7 +17,7 @@ This file is both a page template and a complete bootstrap guide for a coding ag
 
 Before acting, read this entire file with one whole-file read. Do not start with line ranges; use targeted reads only to recover output omitted by tool truncation.
 
-Treat the directory containing the supplied `DocTemplate.html` as the documentation root. Keep `DocTemplate.html`, `index.html`, and every later HTML page at that root; do not move the template into a new nested directory.
+Record the exact name of this supplied HTML file as `<template-file>` before acting. It must end in `.html` and must not be `index.html`. Treat its directory as the documentation root and keep every HTML page at that root.
 
 The finished site must not require a web server, package manager, CDN, or network connection at runtime. Acquisition tools such as npm or LibMan are authoring-time choices only; every method must produce the same checked-in offline files and licenses.
 
@@ -31,7 +31,7 @@ Use this short path for the initial task; the rest of the file contains the refe
 2. Do not process `Future documentation writing guide`, `Maintain the page array`, or `Visual and interaction rules` as initial-task instructions. They remain reference material for later work.
 3. Keep every output write beneath the supplied documentation root. Keep acquisition writes beneath one recorded OS-temporary staging root.
 4. Produce exactly the 25 files in the required tree, including only two HTML pages.
-5. Copy file payloads verbatim. Re-extract every named payload and compare it with its destination after normalizing line endings; an empty or partial file fails. Then validate, remove the staging root, report any unavailable interactive checks, and stop.
+5. Resolve `<template-file>` in `documentation.pages.js`; copy all other file payloads verbatim. Compare every resolved payload with its destination after normalizing line endings. Then validate, clean up, and stop.
 
 The required tree, pinned versions, canonical source-to-destination mappings, integrity meaning, embedded payload content, cleanup outcome, and validation result are fixed contracts. The acquisition tool, temporary-directory implementation, archive command, cryptographic implementation, and browser capability are host-specific choices. Inspect the actual platform and project policy at those choice points; do not turn an example for one environment into a universal requirement.
 
@@ -50,14 +50,14 @@ The live `<head>` contains a `documentation-template-version` meta value. It rec
 
 ## Canonical page shell
 
-Create every page by copying `DocTemplate.html` and replacing only the Markdown inside `documentation-markdown`. The shared page frame is:
+Create every page by copying `<template-file>` and replacing only the Markdown inside `documentation-markdown`. The shared page frame is:
 
 ```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="1.0.1">
+  <meta name="documentation-template-version" content="1.1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -72,7 +72,7 @@ Create every page by copying `DocTemplate.html` and replacing only the Markdown 
 </html>
 ```
 
-The backslash in the raw reference prevents this guide from closing its own Markdown element. The renderer removes that one escape, so the displayed and copied code contains the normal HTML closing tag. Do not reconstruct pages from this reference when `DocTemplate.html` is available; copying the file preserves the exact shell automatically.
+The backslash in the raw reference prevents this guide from closing its own Markdown element. The renderer removes that one escape, so the displayed and copied code contains the normal HTML closing tag. Do not reconstruct pages from this reference when `<template-file>` is available; copying the file preserves the exact shell automatically.
 
 ## Required result
 
@@ -81,7 +81,7 @@ Create this relative layout beneath the documentation root:
 ```text
 <documentation-root>/
 ├── index.html
-├── DocTemplate.html
+├── <template-file>
 ├── THIRD-PARTY-NOTICES.md
 ├── css/
 │   ├── documentation.css
@@ -126,13 +126,13 @@ This 25-file tree is the complete initial result, not a starting point for sampl
 - Do not continue if a pinned package, required file, or license cannot be obtained and verified through an approved source.
 - Perform one-time acquisition outside the documentation directory and target repository. Cleanup is part of the operation even when acquisition or validation fails.
 - Do not finish while a temporary directory, `node_modules`, package manifest, lock file, downloaded archive, browser profile, or validation-tool installation created by this task still exists.
-- During initial bootstrap, create only `index.html` and the supplied `DocTemplate.html`. Additional documentation pages belong to a later, explicit authoring task.
+- During initial bootstrap, create only `index.html` and the supplied `<template-file>`. Additional documentation pages belong to a later, explicit authoring task.
 
 ## Capability preflight
 
 Complete this short preflight before creating output files or downloading packages:
 
-1. Treat the directory containing `DocTemplate.html` as the documentation root. Inspect only in-scope project policy and any asset workflow already used by that project.
+1. Treat the directory containing `<template-file>` as the documentation root. Inspect only in-scope project policy and any asset workflow already used by that project.
 2. Read the task restrictions first. Choose the first permitted acquisition route in the route selector below; never probe a forbidden tool.
 3. Check only the capabilities required by that route. Do not install a package manager, browser automation, or validation tool merely for this bootstrap.
 4. Resolve planned write destinations before writing. Every output must be beneath the documentation root and every acquisition artifact beneath one recorded OS-temporary staging root. Do not use a repository-scoped patch or edit helper to write into an external target because it may redirect relative paths to its workspace.
@@ -143,8 +143,8 @@ This preflight is read-only and must leave no files, configuration, downloads, o
 
 ## Bootstrap sequence
 
-1. Keep this file at the documentation root as `DocTemplate.html`.
-2. Copy `DocTemplate.html` to `index.html`. Replace only its embedded Markdown with this deliberately minimal content:
+1. Keep this file at the documentation root under its original `<template-file>` name.
+2. Copy `<template-file>` to `index.html`. Replace only its embedded Markdown with this deliberately minimal content:
 
 ```markdown
 # Documentation
@@ -153,7 +153,7 @@ This preflight is read-only and must leave no files, configuration, downloads, o
 3. Create the `css`, `css/fonts`, `js`, and `licenses` directories shown above.
 4. Follow the route selected during capability preflight. Do not search outside the target project or create a permanent asset workflow only for this bootstrap.
 5. Acquire the pinned vendor packages in a unique system temporary directory outside the target repository. Copy and verify only the canonical files below, then remove the entire temporary directory in guaranteed cleanup.
-6. Create each project-owned `documentation.*` file from its `File payload` block in this guide, then compare the complete extracted payload with the destination after normalizing line endings. Do not accept existence, size, or a negative text search as proof of a correct copy.
+6. Create each project-owned `documentation.*` file from its `File payload` block. Resolve `<template-file>` in `documentation.pages.js`, then compare every complete resolved payload with its destination after normalizing line endings.
 7. Customize only the identity in `js/documentation.pages.js` when a real project identity is already available. Otherwise retain the neutral identity; never invent one. Keep exactly the two supplied page entries and do not invent online links.
 8. Perform every validation check at the end of this guide, including exact file-set and cleanup checks.
 9. Stop after the minimal two-page shell passes. Documentation authoring is a separate task.
@@ -386,7 +386,7 @@ printf '%s\n' "Documentation is ready."
 
 ## Maintain the page array
 
-Every HTML page must have exactly one object in the `pages` array in `js/documentation.pages.js`. The array order is the Documentation menu order. Initial bootstrap keeps exactly the `index.html` and `DocTemplate.html` entries shown below.
+Every HTML page must have exactly one object in the `pages` array in `js/documentation.pages.js`. The array order is the Documentation menu order. Initial bootstrap keeps exactly the `index.html` and `<template-file>` entries shown below.
 
 | Property | Meaning |
 | --- | --- |
@@ -397,7 +397,7 @@ Every HTML page must have exactly one object in the `pages` array in `js/documen
 
 For each new page:
 
-1. Copy `DocTemplate.html` to the new relative path.
+1. Copy `<template-file>` to the new relative path.
 2. Replace only the embedded Markdown and begin it with one `#` heading.
 3. Add one `pages` entry with the same relative path, its menu label, browser title, and icon.
 4. Open the page directly and confirm its menu entry is active.
@@ -416,11 +416,11 @@ For each new page:
 
 ### Built-in Mermaid smoke test
 
-This small diagram is intentionally part of `DocTemplate.html`, so the minimal two-page bootstrap can verify Mermaid without creating a sample content page:
+This small diagram is intentionally part of `<template-file>`, so the minimal two-page bootstrap can verify Mermaid without creating a sample content page:
 
 ```mermaid
 flowchart LR
-    T[DocTemplate.html] --> I[index.html]
+    T[Template file] --> I[index.html]
 ```
 
 ## File payload: `css/documentation.css`
@@ -759,7 +759,7 @@ blockquote p {
     brandIcon: 'bi-journal-text',
     pages: [
       { path: 'index.html', label: 'Home', title: 'Documentation', icon: 'bi-house-door' },
-      { path: 'DocTemplate.html', label: 'Template', title: 'Documentation template', icon: 'bi-file-earmark-code' }
+      { path: '<template-file>', label: 'Template', title: 'Documentation template', icon: 'bi-file-earmark-code' }
     ],
     onlineLinks: []
   };
@@ -1156,19 +1156,19 @@ The project-owned `documentation.*` files remain visibly distinct from these ven
 
 ## Validation checklist
 
-- Confirm the documentation directory contains exactly the required result and exactly two HTML files: `index.html` and `DocTemplate.html`.
-- Confirm every HTML page contains exactly one live `documentation-template-version` meta element and that all pages retain the value from the supplied `DocTemplate.html`.
-- For every `File payload` heading, confirm its destination is non-empty and its complete content exactly equals the fenced payload after line-ending normalization. This must catch empty, truncated, or partly extracted project-owned files.
+- Confirm the documentation directory contains exactly the required result and exactly two HTML files: `index.html` and `<template-file>`.
+- Confirm every HTML page contains exactly one live `documentation-template-version` meta element and that all pages retain the value from the supplied `<template-file>`.
+- For every `File payload` heading, confirm its destination is non-empty and its complete content equals the resolved fenced payload after line-ending normalization.
 - Confirm no `.documentation-vendor`, `node_modules`, package manifest, lock file, downloaded archive, validation-tool installation, or task-created browser profile remains in the repository or at the recorded temporary path.
 - When capability preflight established supported local-file browser access, open `index.html` directly from a path beginning with `file:` and confirm it renders with networking disabled. Otherwise record both checks as unavailable and use the static checks below; no server is allowed as a substitute.
-- Switch between `index.html` and `DocTemplate.html`; confirm each current page is active and both registered pages appear exactly once.
+- Switch between `index.html` and `<template-file>`; confirm each current page is active and both registered pages appear exactly once.
 - If real optional online links were explicitly configured later, confirm they are under the separate Online menu and open a new tab. Otherwise this check is not applicable.
 - Confirm the navbar remains usable at desktop and mobile widths.
 - Confirm light and dark modes preserve readable colors and visible icons.
 - Confirm fenced `csharp`, `powershell`, `bash`, and `cmd` blocks receive Highlight.js token markup and readable light/dark theme colors.
-- On `DocTemplate.html`, confirm code-copy buttons copy only their code block and show Copied feedback.
-- On `DocTemplate.html`, confirm the built-in Mermaid smoke diagram renders without loading a remote resource.
-- Confirm switching between the minimal `index.html` and long `DocTemplate.html` does not move the horizontal layout.
+- On `<template-file>`, confirm code-copy buttons copy only their code block and show Copied feedback.
+- On `<template-file>`, confirm the built-in Mermaid smoke diagram renders without loading a remote resource.
+- Confirm switching between the minimal `index.html` and long `<template-file>` does not move the horizontal layout.
 - Confirm every vendored version and license in `THIRD-PARTY-NOTICES.md` matches the selected pinned package source.
 - Check live HTML and CSS for remote runtime `src`, `href`, font, or import dependencies. In each HTML file, inspect the actual `<head>` before `<body>`; do not scan the raw `documentation-markdown` element or its fenced examples as though they were live HTML. Search only `js/documentation.loader.js`, `js/documentation.pages.js`, and `js/documentation.js` for unintended `fetch()` calls; required unmodified vendor distributions may contain dormant internal code.
 - Confirm the browser console contains no missing-file, script, font, Markdown, syntax-highlighting, or Mermaid errors.

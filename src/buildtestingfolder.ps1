@@ -1,5 +1,7 @@
 [CmdletBinding()]
-param()
+param(
+    [string]$FileName = 'DocTemplate.html'
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -7,6 +9,12 @@ $ErrorActionPreference = 'Stop'
 $templatePath = Join-Path $PSScriptRoot 'DocTemplate.html'
 if (-not (Test-Path -LiteralPath $templatePath -PathType Leaf)) {
     throw "Template file not found: $templatePath"
+}
+
+if ([System.IO.Path]::GetFileName($FileName) -ne $FileName -or
+    [System.IO.Path]::GetExtension($FileName) -ne '.html' -or
+    $FileName -ieq 'index.html') {
+    throw "FileName must be an HTML leaf name other than index.html: $FileName"
 }
 
 $templateContent = Get-Content -LiteralPath $templatePath -Raw
@@ -47,7 +55,7 @@ if (-not $targetDirectory.StartsWith($requiredPrefix, [System.StringComparison]:
 }
 
 New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
-$targetPath = Join-Path $targetDirectory (Split-Path -Leaf $templatePath)
+$targetPath = Join-Path $targetDirectory $FileName
 Copy-Item -LiteralPath $templatePath -Destination $targetPath -Force
 
 $sourceHash = (Get-FileHash -LiteralPath $templatePath -Algorithm SHA256).Hash

@@ -55,10 +55,11 @@ Bump the version for every product change before building a test folder.
 
 ## Build and test
 
-Run `./buildtestingfolder.ps1`. It reads the live version, creates
-`./<version>/DocTemplate.html`, and verifies the copy by SHA-256. Versioned
-folders are ignored local workspaces. Run the bootstrap prompt against that
-copy and validate the result using the checklist inside the product.
+Run `./buildtestingfolder.ps1`. It reads the live version, creates the
+versioned test copy, and verifies it by SHA-256. Use `-FileName Docs.html` to
+test an alternative initial name. Versioned folders are ignored local
+workspaces. Run the bootstrap prompt against the copy and validate the result
+using the checklist inside the product.
 
 ## Commits
 

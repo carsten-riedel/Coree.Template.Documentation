@@ -17,6 +17,9 @@ The versioned folder can then be used as an isolated target for testing the
 agent bootstrap prompt. Generated version folders are local test workspaces
 and are ignored by Git.
 
+Pass an alternative initial name when testing filename-independent bootstrap:
+`src/buildtestingfolder.ps1 -FileName Documentation.html`.
+
 Product maintenance rules are defined in [`src/AGENTS.md`](src/AGENTS.md).
 
 ## License
