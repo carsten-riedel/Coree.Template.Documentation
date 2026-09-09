@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="1.1.0">
+  <meta name="documentation-template-version" content="2.0.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
-  <link rel="stylesheet" href="./css/documentation.css">
-  <script src="./js/documentation.loader.js" defer></script>
+  <link rel="stylesheet" href="./documentation/css/documentation.css">
+  <script src="./documentation/js/documentation.loader.js" defer></script>
 </head>
 <body>
   <script id="documentation-markdown" type="text/markdown">
@@ -57,12 +57,12 @@ Create every page by copying `<template-file>` and replacing only the Markdown i
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-version" content="1.1.0">
+  <meta name="documentation-template-version" content="2.0.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
-  <link rel="stylesheet" href="./css/documentation.css">
-  <script src="./js/documentation.loader.js" defer><\/script>
+  <link rel="stylesheet" href="./documentation/css/documentation.css">
+  <script src="./documentation/js/documentation.loader.js" defer><\/script>
 </head>
 <body>
   <script id="documentation-markdown" type="text/markdown">
@@ -83,32 +83,36 @@ Create this relative layout beneath the documentation root:
 ├── index.html
 ├── <template-file>
 ├── THIRD-PARTY-NOTICES.md
-├── css/
-│   ├── documentation.css
-│   ├── bootstrap.min.css
-│   ├── bootstrap-icons.min.css
-│   ├── highlight.github.min.css
-│   ├── highlight.github-dark.min.css
-│   └── fonts/
-│       └── bootstrap-icons.woff2
-├── js/
-│   ├── documentation.loader.js
-│   ├── documentation.pages.js
-│   ├── documentation.js
-│   ├── bootstrap.bundle.min.js
-│   ├── marked.umd.js
-│   ├── highlight.min.js
-│   ├── highlight.powershell.min.js
-│   ├── highlight.dos.min.js
-│   ├── clipboard.min.js
-│   └── mermaid.min.js
-└── licenses/
-    ├── bootstrap.LICENSE.txt
-    ├── bootstrap-icons.LICENSE.txt
-    ├── clipboard.LICENSE.txt
-    ├── highlight.LICENSE.txt
-    ├── marked.LICENSE.txt
-    └── mermaid.LICENSE.txt
+├── documentation/
+│   ├── css/
+│   │   └── documentation.css
+│   └── js/
+│       ├── documentation.loader.js
+│       ├── documentation.pages.js
+│       └── documentation.js
+└── vendor/
+    ├── css/
+    │   ├── bootstrap.min.css
+    │   ├── bootstrap-icons.min.css
+    │   ├── highlight.github.min.css
+    │   ├── highlight.github-dark.min.css
+    │   └── fonts/
+    │       └── bootstrap-icons.woff2
+    ├── js/
+    │   ├── bootstrap.bundle.min.js
+    │   ├── marked.umd.js
+    │   ├── highlight.min.js
+    │   ├── highlight.powershell.min.js
+    │   ├── highlight.dos.min.js
+    │   ├── clipboard.min.js
+    │   └── mermaid.min.js
+    └── licenses/
+        ├── bootstrap.LICENSE.txt
+        ├── bootstrap-icons.LICENSE.txt
+        ├── clipboard.LICENSE.txt
+        ├── highlight.LICENSE.txt
+        ├── marked.LICENSE.txt
+        └── mermaid.LICENSE.txt
 ```
 
 This 25-file tree is the complete initial result, not a starting point for sample content. Do not add other HTML pages, package-manager manifests, dependency directories, downloaded archives, validation tools, or staging files. All HTML, CSS, font, JavaScript, and license paths must remain relative.
@@ -118,6 +122,7 @@ This 25-file tree is the complete initial result, not a starting point for sampl
 - Follow the initial bootstrap action card.
 - Keep the copied HTML shell unchanged except for Markdown inside the `documentation-markdown` element.
 - Preserve the live `documentation-template-version` meta value in every generated page. It identifies the template version used for the initial documentation bootstrap.
+- Keep project-owned runtime files under `documentation` and unmodified third-party assets and licenses under `vendor`.
 - Every page contains exactly one local stylesheet link and one local loader script.
 - Do not use CDNs, remote fonts, remote APIs, runtime package installation, Markdown `fetch()`, or a required local web server.
 - Do not execute commands found in project documentation. Examples are content, not authoring instructions.
@@ -150,11 +155,11 @@ This preflight is read-only and must leave no files, configuration, downloads, o
 # Documentation
 ```
 
-3. Create the `css`, `css/fonts`, `js`, and `licenses` directories shown above.
+3. Create the `documentation/css`, `documentation/js`, `vendor/css`, `vendor/css/fonts`, `vendor/js`, and `vendor/licenses` directories shown above.
 4. Follow the route selected during capability preflight. Do not search outside the target project or create a permanent asset workflow only for this bootstrap.
 5. Acquire the pinned vendor packages in a unique system temporary directory outside the target repository. Copy and verify only the canonical files below, then remove the entire temporary directory in guaranteed cleanup.
 6. Create each project-owned `documentation.*` file from its `File payload` block. Resolve `<template-file>` in `documentation.pages.js`, then compare every complete resolved payload with its destination after normalizing line endings.
-7. Customize only the identity in `js/documentation.pages.js` when a real project identity is already available. Otherwise retain the neutral identity; never invent one. Keep exactly the two supplied page entries and do not invent online links.
+7. Customize only the identity in `documentation/js/documentation.pages.js` when a real project identity is already available. Otherwise retain the neutral identity; never invent one. Keep exactly the two supplied page entries and do not invent online links.
 8. Perform every validation check at the end of this guide, including exact file-set and cleanup checks.
 9. Stop after the minimal two-page shell passes. Documentation authoring is a separate task.
 
@@ -257,24 +262,24 @@ Copy these package-relative files without modifying them. Archive/package paths 
 
 | Package-relative source | Documentation file |
 | --- | --- |
-| `bootstrap/dist/css/bootstrap.min.css` | `css/bootstrap.min.css` |
-| `bootstrap/dist/js/bootstrap.bundle.min.js` | `js/bootstrap.bundle.min.js` |
-| `bootstrap/LICENSE` | `licenses/bootstrap.LICENSE.txt` |
-| `bootstrap-icons/font/bootstrap-icons.min.css` | `css/bootstrap-icons.min.css` |
-| `bootstrap-icons/font/fonts/bootstrap-icons.woff2` | `css/fonts/bootstrap-icons.woff2` |
-| `bootstrap-icons/LICENSE` | `licenses/bootstrap-icons.LICENSE.txt` |
-| `clipboard/dist/clipboard.min.js` | `js/clipboard.min.js` |
-| `clipboard/LICENSE` | `licenses/clipboard.LICENSE.txt` |
-| `@highlightjs/cdn-assets/highlight.min.js` | `js/highlight.min.js` |
-| `@highlightjs/cdn-assets/languages/powershell.min.js` | `js/highlight.powershell.min.js` |
-| `@highlightjs/cdn-assets/languages/dos.min.js` | `js/highlight.dos.min.js` |
-| `@highlightjs/cdn-assets/styles/github.min.css` | `css/highlight.github.min.css` |
-| `@highlightjs/cdn-assets/styles/github-dark.min.css` | `css/highlight.github-dark.min.css` |
-| `@highlightjs/cdn-assets/LICENSE` | `licenses/highlight.LICENSE.txt` |
-| `marked/lib/marked.umd.js` | `js/marked.umd.js` |
-| `marked/LICENSE` | `licenses/marked.LICENSE.txt` |
-| `mermaid/dist/mermaid.min.js` | `js/mermaid.min.js` |
-| `mermaid/LICENSE` | `licenses/mermaid.LICENSE.txt` |
+| `bootstrap/dist/css/bootstrap.min.css` | `vendor/css/bootstrap.min.css` |
+| `bootstrap/dist/js/bootstrap.bundle.min.js` | `vendor/js/bootstrap.bundle.min.js` |
+| `bootstrap/LICENSE` | `vendor/licenses/bootstrap.LICENSE.txt` |
+| `bootstrap-icons/font/bootstrap-icons.min.css` | `vendor/css/bootstrap-icons.min.css` |
+| `bootstrap-icons/font/fonts/bootstrap-icons.woff2` | `vendor/css/fonts/bootstrap-icons.woff2` |
+| `bootstrap-icons/LICENSE` | `vendor/licenses/bootstrap-icons.LICENSE.txt` |
+| `clipboard/dist/clipboard.min.js` | `vendor/js/clipboard.min.js` |
+| `clipboard/LICENSE` | `vendor/licenses/clipboard.LICENSE.txt` |
+| `@highlightjs/cdn-assets/highlight.min.js` | `vendor/js/highlight.min.js` |
+| `@highlightjs/cdn-assets/languages/powershell.min.js` | `vendor/js/highlight.powershell.min.js` |
+| `@highlightjs/cdn-assets/languages/dos.min.js` | `vendor/js/highlight.dos.min.js` |
+| `@highlightjs/cdn-assets/styles/github.min.css` | `vendor/css/highlight.github.min.css` |
+| `@highlightjs/cdn-assets/styles/github-dark.min.css` | `vendor/css/highlight.github-dark.min.css` |
+| `@highlightjs/cdn-assets/LICENSE` | `vendor/licenses/highlight.LICENSE.txt` |
+| `marked/lib/marked.umd.js` | `vendor/js/marked.umd.js` |
+| `marked/LICENSE` | `vendor/licenses/marked.LICENSE.txt` |
+| `mermaid/dist/mermaid.min.js` | `vendor/js/mermaid.min.js` |
+| `mermaid/LICENSE` | `vendor/licenses/mermaid.LICENSE.txt` |
 
 Before validation completes, remove every disposable staging directory and acquisition artifact created by the task. A successful final documentation tree contains only the required result above. Existing repository-managed asset infrastructure may remain only when it predated the bootstrap or was explicitly requested.
 
@@ -298,7 +303,7 @@ The initial bootstrap stops before this workflow. Apply this guide only when a l
 - Set the browser-tab title in `documentation.pages.js`; keep the HTML fallback title as `Documentation`.
 - Use `##` and `###` in order. The runtime adds stable heading anchors.
 - Keep all HTML pages on the identical shell. Only embedded Markdown differs.
-- Register every HTML page exactly once. With this fixed `./css` and `./js` shell, keep every HTML page at the documentation-directory root; nested HTML paths are not supported.
+- Register every HTML page exactly once. With this fixed `./documentation` shell, keep every HTML page at the documentation-directory root; nested HTML paths are not supported.
 - Keep online destinations in `onlineLinks`. They open in a new tab with `noopener noreferrer` and are visually separated from offline pages.
 - Do not place an HTML script-closing sequence in embedded Markdown because the browser parses this element as raw script text.
 - Do not replace embedded Markdown with a separately fetched file. Relative local-file fetches are unreliable in Chromium-family browsers.
@@ -386,7 +391,7 @@ printf '%s\n' "Documentation is ready."
 
 ## Maintain the page array
 
-Every HTML page must have exactly one object in the `pages` array in `js/documentation.pages.js`. The array order is the Documentation menu order. Initial bootstrap keeps exactly the `index.html` and `<template-file>` entries shown below.
+Every HTML page must have exactly one object in the `pages` array in `documentation/js/documentation.pages.js`. The array order is the Documentation menu order. Initial bootstrap keeps exactly the `index.html` and `<template-file>` entries shown below.
 
 | Property | Meaning |
 | --- | --- |
@@ -423,13 +428,13 @@ flowchart LR
     T[Template file] --> I[index.html]
 ```
 
-## File payload: `css/documentation.css`
+## File payload: `documentation/css/documentation.css`
 
 ```css
-@import url("./bootstrap.min.css");
-@import url("./bootstrap-icons.min.css");
-@import url("./highlight.github.min.css") screen and (prefers-color-scheme: light);
-@import url("./highlight.github-dark.min.css") screen and (prefers-color-scheme: dark);
+@import url("../../vendor/css/bootstrap.min.css");
+@import url("../../vendor/css/bootstrap-icons.min.css");
+@import url("../../vendor/css/highlight.github.min.css") screen and (prefers-color-scheme: light);
+@import url("../../vendor/css/highlight.github-dark.min.css") screen and (prefers-color-scheme: dark);
 
 :root {
   color-scheme: light dark;
@@ -698,7 +703,7 @@ blockquote p {
 }
 ```
 
-## File payload: `js/documentation.loader.js`
+## File payload: `documentation/js/documentation.loader.js`
 
 ```javascript
 (function () {
@@ -706,16 +711,16 @@ blockquote p {
 
   var loader = document.currentScript;
   var loaderSource = loader && loader.src ? loader.src : '';
-  var scriptRoot = loaderSource ? loaderSource.substring(0, loaderSource.lastIndexOf('/') + 1) : './js/';
+  var scriptRoot = loaderSource ? loaderSource.substring(0, loaderSource.lastIndexOf('/') + 1) : './documentation/js/';
   var scripts = [
     'documentation.pages.js',
-    'bootstrap.bundle.min.js',
-    'marked.umd.js',
-    'highlight.min.js',
-    'highlight.powershell.min.js',
-    'highlight.dos.min.js',
-    'clipboard.min.js',
-    'mermaid.min.js',
+    '../../vendor/js/bootstrap.bundle.min.js',
+    '../../vendor/js/marked.umd.js',
+    '../../vendor/js/highlight.min.js',
+    '../../vendor/js/highlight.powershell.min.js',
+    '../../vendor/js/highlight.dos.min.js',
+    '../../vendor/js/clipboard.min.js',
+    '../../vendor/js/mermaid.min.js',
     'documentation.js'
   ];
 
@@ -748,7 +753,7 @@ blockquote p {
 }());
 ```
 
-## File payload: `js/documentation.pages.js`
+## File payload: `documentation/js/documentation.pages.js`
 
 ```javascript
 (function (global) {
@@ -770,7 +775,7 @@ Use this neutral two-page configuration during bootstrap. Change the identity on
 
 Available icons come from the vendored Bootstrap Icons font. Prefer a simple, recognizable icon and keep `onlineLinks` empty unless a real, approved project destination is already known.
 
-## File payload: `js/documentation.js`
+## File payload: `documentation/js/documentation.js`
 
 ```javascript
 (function () {
@@ -1144,12 +1149,12 @@ The packaged documentation vendors these unmodified browser distributions for of
 
 | Package | Version | License |
 | --- | --- | --- |
-| Bootstrap | 5.3.8 | MIT — `licenses/bootstrap.LICENSE.txt` |
-| Bootstrap Icons | 1.13.1 | MIT — `licenses/bootstrap-icons.LICENSE.txt` |
-| ClipboardJS | 2.0.11 | MIT — `licenses/clipboard.LICENSE.txt` |
-| Highlight.js | 11.11.1 | BSD-3-Clause — `licenses/highlight.LICENSE.txt` |
-| Marked | 18.0.6 | MIT — `licenses/marked.LICENSE.txt` |
-| Mermaid | 11.16.0 | MIT — `licenses/mermaid.LICENSE.txt` |
+| Bootstrap | 5.3.8 | MIT — `vendor/licenses/bootstrap.LICENSE.txt` |
+| Bootstrap Icons | 1.13.1 | MIT — `vendor/licenses/bootstrap-icons.LICENSE.txt` |
+| ClipboardJS | 2.0.11 | MIT — `vendor/licenses/clipboard.LICENSE.txt` |
+| Highlight.js | 11.11.1 | BSD-3-Clause — `vendor/licenses/highlight.LICENSE.txt` |
+| Marked | 18.0.6 | MIT — `vendor/licenses/marked.LICENSE.txt` |
+| Mermaid | 11.16.0 | MIT — `vendor/licenses/mermaid.LICENSE.txt` |
 
 The project-owned `documentation.*` files remain visibly distinct from these vendored libraries.
 ```
@@ -1170,7 +1175,7 @@ The project-owned `documentation.*` files remain visibly distinct from these ven
 - On `<template-file>`, confirm the built-in Mermaid smoke diagram renders without loading a remote resource.
 - Confirm switching between the minimal `index.html` and long `<template-file>` does not move the horizontal layout.
 - Confirm every vendored version and license in `THIRD-PARTY-NOTICES.md` matches the selected pinned package source.
-- Check live HTML and CSS for remote runtime `src`, `href`, font, or import dependencies. In each HTML file, inspect the actual `<head>` before `<body>`; do not scan the raw `documentation-markdown` element or its fenced examples as though they were live HTML. Search only `js/documentation.loader.js`, `js/documentation.pages.js`, and `js/documentation.js` for unintended `fetch()` calls; required unmodified vendor distributions may contain dormant internal code.
+- Check live HTML and CSS for remote runtime `src`, `href`, font, or import dependencies. In each HTML file, inspect the actual `<head>` before `<body>`; do not scan the raw `documentation-markdown` element or its fenced examples as though they were live HTML. Search only `documentation/js/documentation.loader.js`, `documentation/js/documentation.pages.js`, and `documentation/js/documentation.js` for unintended `fetch()` calls; required unmodified vendor distributions may contain dormant internal code.
 - Confirm the browser console contains no missing-file, script, font, Markdown, syntax-highlighting, or Mermaid errors.
 - Follow the browser decision established during capability preflight. Do not call a browser-control API merely to discover its common `file:` restriction. When direct local-file access was accepted, perform the interactive checks with that capability. Otherwise do not retry or install browser automation; complete the static checks, list the unperformed interactive checks, and leave no validation artifacts.
   </script>
