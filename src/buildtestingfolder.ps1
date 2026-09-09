@@ -66,7 +66,7 @@ if ($sourceHash -ne $targetHash) {
 }
 
 $promptPath = Join-Path $versionDirectory 'prompt.md'
-$prompt = "Read the complete file `"$targetPath`" with one whole-file read, then execute the initial bootstrap instructions it contains. Treat its directory as the documentation root, complete the validation checklist, remove temporary acquisition artifacts, report the result, and stop. Do not author additional documentation."
+$prompt = "Read the file `"$targetPath`" and execute the instructions it contains. Do nothing else."
 [System.IO.File]::WriteAllText($promptPath, $prompt + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
 
 Write-Output "Template version: $templateVersion"
