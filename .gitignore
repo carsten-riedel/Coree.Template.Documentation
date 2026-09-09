@@ -1,0 +1,2 @@
+# Local, versioned bootstrap test workspaces
+/src/[0-9]*.[0-9]*.[0-9]*/
