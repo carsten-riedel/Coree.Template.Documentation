@@ -10,3 +10,5 @@
 10) ggf. page external references markdown erweiterung
 11) navbar brand regel
 12) dark layout besser
+13) tabels on small mobile views regel
+14) komplette feature liste von pre 1.0.0
