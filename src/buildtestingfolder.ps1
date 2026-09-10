@@ -67,6 +67,8 @@ $workspaceDirectory = Join-Path $versionDirectory $workspaceName
 New-Item -ItemType Directory -Path $workspaceDirectory -Force | Out-Null
 $targetPath = Join-Path $workspaceDirectory $FileName
 Copy-Item -LiteralPath $templatePath -Destination $targetPath -Force
+$assetsPath = Join-Path $workspaceDirectory 'assets'
+New-Item -ItemType Directory -Path $assetsPath -Force | Out-Null
 
 $sourceHash = (Get-FileHash -LiteralPath $templatePath -Algorithm SHA256).Hash
 $targetHash = (Get-FileHash -LiteralPath $targetPath -Algorithm SHA256).Hash
