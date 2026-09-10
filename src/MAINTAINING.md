@@ -81,8 +81,6 @@ uncommitted. The tracked working tree should be clean after pushing.
 
 ## Open points
 
-- Inspect and fix the visual copy-button edge case when long code lines overflow
-  horizontally.
 - For a future major version, decide whether the documentation writing guide
   should become a dedicated artifact created during bootstrap.
 - Add a concise product rationale covering low agent overhead and documentation
