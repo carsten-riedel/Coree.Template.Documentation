@@ -71,8 +71,6 @@ work. Leave the tracked working tree clean after pushing.
 
 ## Open points
 
-- Decide whether bootstrap should include the template's own license alongside
-  third-party licenses.
 - Define print behavior for heading page breaks, common paper sizes, and content
   overflow.
 - Keep copy controls usable when code blocks overflow horizontally.
