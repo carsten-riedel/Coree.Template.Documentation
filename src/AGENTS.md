@@ -73,15 +73,15 @@ work. Leave the tracked working tree clean after pushing.
 
 - Define print behavior for heading page breaks, common paper sizes, and content
   overflow.
-- Verify that copy controls remain visible and usable when long code lines
-  overflow horizontally.
+- Inspect and fix the visual copy-button edge case when long code lines overflow
+  horizontally.
 - Evaluate a human-facing maintainer filename while preserving automatic
   discovery of `AGENTS.md`.
 - For a future major version, decide whether the documentation writing guide
   should become a dedicated artifact created during bootstrap.
 - Add a concise product rationale covering low agent overhead and documentation
   that remains readable offline and online.
-- Define relative folders and authoring rules for images, PDFs, and other assets.
-- Decide whether pages should support references to external Markdown content.
+- Define an assets folder in the required directory layout and relative
+  authoring rules for images, PDFs, and externally referenced Markdown files.
 - Keep tables usable on narrow mobile screens.
 - Reconstruct the complete feature list that predates version 1.0.0.
