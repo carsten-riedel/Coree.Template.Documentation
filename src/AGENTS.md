@@ -68,3 +68,9 @@ isolated `workspace-Docs` test of an alternative initial name.
 Commit and push after each coherent, verified product change, including its
 release baseline. Do not commit prompts, materialized test output, or unfinished
 work. Leave the tracked working tree clean after pushing.
+
+## Open points
+
+- Decide whether bootstrap should include the template's own license alongside
+  third-party licenses.
+- Consider author or origin metadata so forks can retain clear provenance.
