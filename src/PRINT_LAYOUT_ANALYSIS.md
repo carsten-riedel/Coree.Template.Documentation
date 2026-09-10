@@ -1,16 +1,16 @@
 # Print layout analysis
 
-Status: implemented as `3.3.0-preview`; pending broader evaluation
+Status: implemented and accepted as `3.3.0`
 
 Baseline: `DocTemplate.html` version 3.2.3
 
-Preview implementation: `DocTemplate.html` version `3.3.0-preview`
+Implementation: `DocTemplate.html` version 3.3.0
 
 Research and validation date: 2026-09-10
 
 ## Decision
 
-`3.3.0-preview` implements an adaptive CSS print layer in the existing
+3.3.0 implements an adaptive CSS print layer in the existing
 `documentation/css/documentation.css` payload. It adds no stylesheet, runtime
 dependency, build mode, print button, or output file.
 
@@ -36,15 +36,15 @@ The recommended baseline is:
 This is a backward-compatible feature and therefore a minor version under the
 repository's versioning rules.
 
-## Preview reassessment
+## Implementation reassessment
 
-Compared with 3.2.3, the complete product grows from 57,187 to 58,905 UTF-8
-bytes: 1,718 bytes or 3.00%. It grows from 1,237 to 1,328 source lines. The CSS
+Compared with 3.2.3, the complete product grows from 57,187 to 58,889 UTF-8
+bytes: 1,702 bytes or 2.98%. It grows from 1,237 to 1,328 source lines. The CSS
 payload accounts for 1,253 bytes and 89 lines; the JavaScript payload becomes 37
 bytes smaller because Mermaid now uses the fixed `neutral` theme.
 
 The earlier explicit prototype repeated a complete light palette and several
-legacy or redundant declarations. The preview instead limits the existing dark
+legacy or redundant declarations. The implementation limits the existing dark
 palette to `screen`, so print reuses the base light variables. It omits forced
 page breaks, repeated-header assumptions, legacy `page-break-*` aliases, a
 second stylesheet, and JavaScript print state.
@@ -58,8 +58,7 @@ was detected. The first pass exposed an overflowing mapping table; the final
 cell-specific print rule fixed it without forcing equal column widths.
 
 The added CSS is therefore proportionate to the observed defects. Firefox and
-macOS/Safari remain useful compatibility checks before promoting the preview to
-the final 3.3.0 release.
+macOS/Safari remain useful future compatibility checks.
 
 ## 3.2.3 baseline behavior
 
@@ -145,9 +144,9 @@ The product should not force a page break before every `h1`, `h2`, or `h3`.
 Every HTML file already begins with one `h1`, and forced breaks on lower
 headings would create large gaps and potentially blank pages.
 
-The preview uses `break-after: avoid-page` on `h1` through `h3`. This asks the
-formatter to keep a heading with the first following block. It omits the legacy
-`page-break-after` alias to avoid a duplicate declaration; compatibility testing
+The implementation uses `break-after: avoid-page` on `h1` through `h3`. This
+asks the formatter to keep a heading with the first following block. It omits
+the legacy `page-break-after` alias to avoid a duplicate declaration; compatibility testing
 can add it later if a supported browser proves to need it.[^2]
 
 `orphans: 3` and `widows: 3` on paragraphs and list items improve prose without
@@ -264,7 +263,7 @@ Paged.js, WeasyPrint, and Prince solve a broader publishing problem. The current
 product is a portable local documentation shell. Adding any of them for basic
 printing would conflict with its small bootstrap and exact offline file tree.
 
-## Preview implementation
+## Implementation
 
 The complete CSS and JavaScript payloads in `DocTemplate.html` are the
 authoritative implementation. Repeating them here would create another editing
@@ -337,7 +336,7 @@ spacing, diagram contrast, and page-break quality.
 
 ## Product blast radius
 
-The preview touches only the places that define or verify the new contract:
+The 3.3.0 change touches only the places that define or verify the new contract:
 
 1. live and canonical `documentation-template-version` values;
 2. the light Highlight.js import and print rules in the
@@ -345,7 +344,7 @@ The preview touches only the places that define or verify the new contract:
 3. the Mermaid theme in the `documentation.js` payload;
 4. one concise print rule in `Visual and interaction rules`;
 5. print checks in the validation checklist;
-6. the `3.3.0-preview` release baseline produced by
+6. the 3.3.0 release baseline produced by
    `buildtestingfolder.ps1`.
 
 The required 26-file tree, filenames, loader order, third-party versions,

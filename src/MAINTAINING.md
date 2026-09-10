@@ -81,8 +81,6 @@ uncommitted. The tracked working tree should be clean after pushing.
 
 ## Open points
 
-- Evaluate the `3.3.0-preview` print baseline in Firefox and, when available,
-  Safari; then refine or promote it as 3.3.0.
 - Inspect and fix the visual copy-button edge case when long code lines overflow
   horizontally.
 - For a future major version, decide whether the documentation writing guide
