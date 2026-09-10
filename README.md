@@ -19,7 +19,9 @@ Generated version folders are local test workspaces and are ignored by Git.
 Pass an alternative initial name when testing filename-independent bootstrap:
 `src/buildtestingfolder.ps1 -FileName Documentation.html`.
 
-Product maintenance rules are defined in [`src/AGENTS.md`](src/AGENTS.md).
+Product maintenance guidance for human and automated editors is defined in
+[`src/MAINTAINING.md`](src/MAINTAINING.md). [`src/AGENTS.md`](src/AGENTS.md)
+retains automatic discovery for agent tooling.
 
 ## License
 
