@@ -85,7 +85,4 @@ uncommitted. The tracked working tree should be clean after pushing.
   should become a dedicated artifact created during bootstrap.
 - Add a concise product rationale covering low agent overhead and documentation
   that remains readable offline and online.
-- Define relative authoring rules for PDFs and externally referenced Markdown
-  files.
-- Keep tables usable on narrow mobile screens.
 - Reconstruct the complete feature list that predates version 1.0.0.
