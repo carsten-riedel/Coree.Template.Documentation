@@ -1,17 +1,18 @@
 # Print layout analysis
 
-Status: decision basis for a future product change
+Status: implemented as `3.3.0-preview`; pending broader evaluation
 
-Analyzed product source: `DocTemplate.html` version 3.2.3
+Baseline: `DocTemplate.html` version 3.2.3
+
+Preview implementation: `DocTemplate.html` version `3.3.0-preview`
 
 Research and validation date: 2026-09-10
 
 ## Decision
 
-The product should gain an adaptive CSS print layer in version 3.3.0. It should
-remain part of the existing `documentation/css/documentation.css` payload and
-should not add another stylesheet, runtime dependency, build mode, or print
-button.
+`3.3.0-preview` implements an adaptive CSS print layer in the existing
+`documentation/css/documentation.css` payload. It adds no stylesheet, runtime
+dependency, build mode, print button, or output file.
 
 The recommended baseline is:
 
@@ -35,10 +36,35 @@ The recommended baseline is:
 This is a backward-compatible feature and therefore a minor version under the
 repository's versioning rules.
 
-## Current product behavior
+## Preview reassessment
 
-The current CSS payload has responsive screen rules but no `@media print` or
-`@page` rule. Several existing choices therefore become print defects:
+Compared with 3.2.3, the complete product grows from 57,187 to 58,905 UTF-8
+bytes: 1,718 bytes or 3.00%. It grows from 1,237 to 1,328 source lines. The CSS
+payload accounts for 1,253 bytes and 89 lines; the JavaScript payload becomes 37
+bytes smaller because Mermaid now uses the fixed `neutral` theme.
+
+The earlier explicit prototype repeated a complete light palette and several
+legacy or redundant declarations. The preview instead limits the existing dark
+palette to `screen`, so print reuses the base light variables. It omits forced
+page breaks, repeated-header assumptions, legacy `page-break-*` aliases, a
+second stylesheet, and JavaScript print state.
+
+An offline Chrome 152 test started with a dark color preference and generated
+PDFs with background graphics disabled. The result was 41 A4 pages at 595.92 x
+842.88 points and 43 Letter pages at 612 x 792 points. Navigation and copy
+controls were hidden, code used visible `pre-wrap`, Mermaid used light neutral
+colors, no remote request or browser error occurred, and no horizontal overflow
+was detected. The first pass exposed an overflowing mapping table; the final
+cell-specific print rule fixed it without forcing equal column widths.
+
+The added CSS is therefore proportionate to the observed defects. Firefox and
+macOS/Safari remain useful compatibility checks before promoting the preview to
+the final 3.3.0 release.
+
+## 3.2.3 baseline behavior
+
+The 3.2.3 CSS payload has responsive screen rules but no `@media print` or
+`@page` rule. Several choices therefore become print defects:
 
 | Current behavior | Print result |
 | --- | --- |
@@ -61,7 +87,7 @@ valid print fixture for the current CSS.
 The materialized 3.2.1 `Documentation.html` was printed with Chrome 152 on
 Windows under a dark color preference.
 
-The current stylesheet produced a 36-page Letter PDF. Visual inspection found:
+The 3.2.3 stylesheet produced a 36-page Letter PDF. Visual inspection found:
 
 1. the navbar and mobile toggle on the first page;
 2. visible Copy labels inside code blocks;
@@ -119,11 +145,10 @@ The product should not force a page break before every `h1`, `h2`, or `h3`.
 Every HTML file already begins with one `h1`, and forced breaks on lower
 headings would create large gaps and potentially blank pages.
 
-The correct default is `break-after: avoid-page` on `h1` through `h3`. This asks
-the formatter to keep a heading with the first following block. The legacy
-`page-break-after: avoid` declaration is a small compatibility fallback; the
-CSS Fragmentation specification defines the older page-break properties as
-aliases of the modern break properties.[^2]
+The preview uses `break-after: avoid-page` on `h1` through `h3`. This asks the
+formatter to keep a heading with the first following block. It omits the legacy
+`page-break-after` alias to avoid a duplicate declaration; compatibility testing
+can add it later if a supported browser proves to need it.[^2]
 
 `orphans: 3` and `widows: 3` on paragraphs and list items improve prose without
 creating forced breaks. These values are constraints that a formatter may relax
@@ -239,116 +264,13 @@ Paged.js, WeasyPrint, and Prince solve a broader publishing problem. The current
 product is a portable local documentation shell. Adding any of them for basic
 printing would conflict with its small bootstrap and exact offline file tree.
 
-## Proposed minimal CSS
+## Preview implementation
 
-This is the decision-ready baseline, not an edit already applied to the product:
-
-```css
-@page {
-  size: auto;
-  margin: 15mm;
-}
-
-@media print {
-  :root {
-    color-scheme: light;
-    --page-background: #ffffff;
-    --surface: #ffffff;
-    --text: #111111;
-    --muted: #444444;
-    --accent: #111111;
-    --accent-soft: #eeeeee;
-    --border: #999999;
-    --code-background: #f4f4f4;
-    --shadow: none;
-  }
-
-  html,
-  body {
-    overflow: visible;
-    min-height: auto;
-    background: #ffffff;
-  }
-
-  .documentation-navbar,
-  .copy-button {
-    display: none !important;
-  }
-
-  .page-width {
-    width: auto;
-    margin: 0;
-  }
-
-  .documentation-content {
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-    background: #ffffff;
-    box-shadow: none;
-    padding: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .documentation-content h1,
-  .documentation-content h2,
-  .documentation-content h3 {
-    break-after: avoid-page;
-    page-break-after: avoid;
-  }
-
-  p,
-  li {
-    orphans: 3;
-    widows: 3;
-  }
-
-  blockquote,
-  .mermaid {
-    break-inside: avoid-page;
-    page-break-inside: avoid;
-  }
-
-  pre {
-    overflow: visible;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-  }
-
-  .code-block pre {
-    padding-right: 1rem;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tr {
-    break-inside: avoid-page;
-    page-break-inside: avoid;
-  }
-
-  th,
-  td {
-    overflow-wrap: anywhere;
-  }
-
-  img,
-  .mermaid svg {
-    max-width: 100%;
-    height: auto;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
-```
-
-The final product edit can remove declarations that prove redundant across the
-target browser matrix. The prototype intentionally favors explicit behavior so
-each rule can be evaluated independently.
+The complete CSS and JavaScript payloads in `DocTemplate.html` are the
+authoritative implementation. Repeating them here would create another editing
+and review point. The retained print rules each address one observed class of
+failure: paper geometry, screen chrome, card layout, fragmentation, long
+content, Bootstrap component colors, or images and diagrams.
 
 ## Validation matrix
 
@@ -413,10 +335,9 @@ An automated Chromium smoke test may generate A4 and Letter PDFs using
 and obvious overflow indicators. Visual review remains necessary for clipping,
 spacing, diagram contrast, and page-break quality.
 
-## Product blast radius for implementation
+## Product blast radius
 
-A 3.3.0 implementation should touch only the places that define or verify the
-new contract:
+The preview touches only the places that define or verify the new contract:
 
 1. live and canonical `documentation-template-version` values;
 2. the light Highlight.js import and print rules in the
@@ -424,7 +345,8 @@ new contract:
 3. the Mermaid theme in the `documentation.js` payload;
 4. one concise print rule in `Visual and interaction rules`;
 5. print checks in the validation checklist;
-6. the 3.3.0 release baseline produced by `buildtestingfolder.ps1`.
+6. the `3.3.0-preview` release baseline produced by
+   `buildtestingfolder.ps1`.
 
 The required 26-file tree, filenames, loader order, third-party versions,
 licenses, acquisition routes, page array, and HTML shell do not need to change.
