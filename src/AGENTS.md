@@ -82,6 +82,5 @@ work. Leave the tracked working tree clean after pushing.
   that remains readable offline and online.
 - Define relative folders and authoring rules for images, PDFs, and other assets.
 - Decide whether pages should support references to external Markdown content.
-- Refine the dark theme.
 - Keep tables usable on narrow mobile screens.
 - Reconstruct the complete feature list that predates version 1.0.0.
