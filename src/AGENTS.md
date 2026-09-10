@@ -73,6 +73,8 @@ work. Leave the tracked working tree clean after pushing.
 
 - Define print behavior for heading page breaks, common paper sizes, and content
   overflow.
+- Verify that copy controls remain visible and usable when long code lines
+  overflow horizontally.
 - Evaluate a human-facing maintainer filename while preserving automatic
   discovery of `AGENTS.md`.
 - For a future major version, decide whether the documentation writing guide
