@@ -81,8 +81,8 @@ uncommitted. The tracked working tree should be clean after pushing.
 
 ## Open points
 
-- Define print behavior for heading page breaks, common paper sizes, and content
-  overflow.
+- Implement and validate the print baseline defined in
+  `PRINT_LAYOUT_ANALYSIS.md`.
 - Inspect and fix the visual copy-button edge case when long code lines overflow
   horizontally.
 - For a future major version, decide whether the documentation writing guide
