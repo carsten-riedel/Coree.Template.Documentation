@@ -73,7 +73,6 @@ work. Leave the tracked working tree clean after pushing.
 
 - Define print behavior for heading page breaks, common paper sizes, and content
   overflow.
-- Keep copy controls usable when code blocks overflow horizontally.
 - Evaluate a human-facing maintainer filename while preserving automatic
   discovery of `AGENTS.md`.
 - For a future major version, decide whether the documentation writing guide
@@ -81,6 +80,5 @@ work. Leave the tracked working tree clean after pushing.
 - Add a concise product rationale covering low agent overhead and documentation
   that remains readable offline and online.
 - Define relative folders and authoring rules for images, PDFs, and other assets.
-- Decide whether pages should support references to external Markdown content.
 - Keep tables usable on narrow mobile screens.
 - Reconstruct the complete feature list that predates version 1.0.0.
