@@ -73,7 +73,6 @@ work. Leave the tracked working tree clean after pushing.
 
 - Decide whether bootstrap should include the template's own license alongside
   third-party licenses.
-- Consider author or origin metadata so forks can retain clear provenance.
 - Define print behavior for heading page breaks, common paper sizes, and content
   overflow.
 - Keep copy controls usable when code blocks overflow horizontally.
