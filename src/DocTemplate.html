@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-product" content="DocShell">
   <meta name="documentation-template-author" content="Carsten Riedel">
   <meta name="documentation-template-source" content="https://github.com/carsten-riedel/Coree.Template.Documentation">
   <meta name="documentation-template-license" content="MIT">
@@ -50,8 +49,6 @@ The required tree, pinned versions, canonical source-to-destination mappings, in
 
 ## 📅 Template version
 
-The live `documentation-template-product` meta value identifies DocShell independently from the project-specific documentation brand.
-
 The live `<head>` contains a `documentation-template-version` meta value. It records the version of this template used to initialize the documentation. Every page created from the template must retain that value unchanged during normal documentation authoring. A later, deliberate re-bootstrap from a newer template records the newer version.
 
 ## 📄 Canonical page shell
@@ -63,7 +60,6 @@ Create every page by copying `<template-file>` and replacing only the Markdown i
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="documentation-template-product" content="DocShell">
   <meta name="documentation-template-author" content="Carsten Riedel">
   <meta name="documentation-template-source" content="https://github.com/carsten-riedel/Coree.Template.Documentation">
   <meta name="documentation-template-license" content="MIT">
@@ -134,7 +130,7 @@ These 26 files plus the empty `assets/` directory are the complete initial resul
 
 - Follow the initial bootstrap action card.
 - Keep the copied HTML shell unchanged except for Markdown inside the `documentation-markdown` element.
-- Preserve the live `documentation-template-product`, `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta values in every generated page.
+- Preserve the live `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta values in every generated page.
 - Keep project-owned runtime files under `documentation` and unmodified third-party assets and licenses under `vendor`.
 - Keep project-provided documentation assets under `assets` and reference them with relative paths.
 - Keep rendered Markdown tables inside a responsive Bootstrap wrapper so narrow viewports scroll the table instead of the page.
@@ -1172,7 +1168,7 @@ The project-owned `documentation.*` files remain visibly distinct from these ven
 
 - Confirm the documentation root contains exactly the required result and exactly two HTML files: `index.html` and `<template-file>`.
 - Confirm the root-level `assets/` directory exists and is empty during initial bootstrap.
-- Confirm both HTML files retain the supplied shell outside `documentation-markdown`, including exactly one local stylesheet link, one local loader script, and one live `documentation-template-product`, `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta element with unchanged values.
+- Confirm both HTML files retain the supplied shell outside `documentation-markdown`, including exactly one local stylesheet link, one local loader script, and one live `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta element with unchanged values.
 - Confirm `index.html` contains exactly the specified minimal Markdown and one `data-documentation-toc` element, with no second page list.
 - Confirm `documentation.pages.js` registers only `index.html` and `<template-file>`, each exactly once, and both files exist at the documentation root.
 - Confirm `documentation-template.LICENSE.txt` equals the verified SPDX source after only the two required replacements and contains neither placeholder.
