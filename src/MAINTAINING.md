@@ -83,6 +83,3 @@ uncommitted. The tracked working tree should be clean after pushing.
 
 - For a future major version, decide whether the documentation writing guide
   should become a dedicated artifact created during bootstrap.
-- Add a concise product rationale covering low agent overhead and documentation
-  that remains readable offline and online.
-- Reconstruct the complete feature list that predates version 1.0.0.
