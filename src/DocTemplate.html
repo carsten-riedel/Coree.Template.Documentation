@@ -6,7 +6,7 @@
   <meta name="documentation-template-source" content="https://github.com/carsten-riedel/Coree.Template.Documentation">
   <meta name="documentation-template-license" content="MIT">
   <meta name="documentation-template-license-year" content="2026">
-  <meta name="documentation-template-version" content="3.5.0">
+  <meta name="documentation-template-version" content="3.4.3">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -17,11 +17,11 @@
   <script id="documentation-markdown" type="text/markdown">
 # 📚 Portable offline documentation template
 
-This HTML is a complete bootstrap guide and the source of a portable offline documentation shell. Use it to create a static documentation site that opens directly from a local or shared folder and has the same navigation, light/dark styling, Markdown rendering, diagrams, and copy controls as this page.
+This file is both a page template and a complete bootstrap guide for a coding agent or language model. Use it to create a static documentation site that opens directly from a local or shared folder and has the same navigation, light/dark styling, Markdown rendering, diagrams, and copy controls as this page.
 
-Before acting, consume this entire HTML from beginning to end. For file input, use one whole-file read and use targeted reads only to recover tool-truncated output. For inline input, use the complete HTML supplied in the prompt as the instruction source.
+Before acting, read this entire file with one whole-file read. Do not start with line ranges; use targeted reads only to recover output omitted by tool truncation.
 
-Resolve and report the input mode, exact `<template-file>`, and absolute `<documentation-root>` before any write. For file input, use the supplied file's exact name and containing directory. For inline input, use `Documentation.html` and a user-specified output directory. Without one, inspect the directory structure recursively beneath the current directory and, when useful, its parent without reading file contents or emitting a file listing; also consider project or workspace roots supplied by the host. Prefer an existing empty directory clearly intended for documentation; otherwise use a new `docs` child of the best-fitting project, repository, workspace, or current directory. Do not search above that parent; when no stronger fit exists, use `<current-directory>/docs`. Confirm an inline destination is absent or empty without emitting file names; never merge into, clear, or overwrite a non-empty directory. `<template-file>` must end in `.html` and must not be `index.html`.
+Record the exact name of this supplied HTML file as `<template-file>` before acting. It must end in `.html` and must not be `index.html`. Treat its directory as the documentation root and keep every HTML page at that root.
 
 The finished site must not require a web server, package manager, CDN, or network connection at runtime. Acquisition tools such as npm or LibMan are authoring-time choices only; every method must produce the same checked-in offline files and licenses.
 
@@ -31,11 +31,11 @@ The initial task is only to bootstrap this documentation shell. Produce the exac
 
 Use this short path for the initial task; the rest of the file contains the referenced payloads and later authoring guidance:
 
-1. After the complete input, resolve and report `<template-file>` and `<documentation-root>`, then locate `Required result`, `Bootstrap sequence`, `Acquisition preflight`, `Materialize template license`, `Fast route selector`, the selected acquisition option, `Canonical file mapping`, every `File payload` section, and `Static validation checklist`.
+1. After the complete read, locate `Required result`, `Capability preflight`, `Bootstrap sequence`, `Materialize template license`, `Fast route selector`, the selected acquisition option, `Canonical file mapping`, every `File payload` section, and `Static validation checklist`.
 2. Do not process `Later documentation authoring` or `Customizable authoring preferences` during the initial task. They require a later user request.
-3. Keep every output write beneath the resolved documentation root. Keep disposable acquisition writes beneath one recorded OS-temporary staging root; an established repository asset workflow may use only its existing managed locations.
+3. Keep every output write beneath the supplied documentation root. Keep disposable acquisition writes beneath one recorded OS-temporary staging root; an established repository asset workflow may use only its existing managed locations.
 4. Produce exactly the 26 files in the required tree, including only two HTML pages.
-5. Materialize and verify the Phase 1 structure and embedded files immediately. Only then run acquisition preflight, acquire the template license and vendor files, materialize them at their canonical destinations, clean up, run static validation, and stop.
+5. Resolve `<template-file>`, materialize `index.html` and every `File payload` directly at their final destinations, and verify that phase. Only then acquire the template license with the permitted download method and the vendor files with the selected route, materialize them at their canonical destinations, clean up, run static validation, and stop.
 
 The required tree, pinned versions, canonical source-to-destination mappings, integrity meaning, embedded payload content, cleanup outcome, and validation result are fixed contracts. The acquisition tool, temporary-directory implementation, archive command, and cryptographic implementation are host-specific choices. Inspect the actual platform and project policy at those choice points; do not turn an example for one environment into a universal requirement.
 
@@ -64,7 +64,7 @@ Create every page by copying `<template-file>` and replacing only the Markdown i
   <meta name="documentation-template-source" content="https://github.com/carsten-riedel/Coree.Template.Documentation">
   <meta name="documentation-template-license" content="MIT">
   <meta name="documentation-template-license-year" content="2026">
-  <meta name="documentation-template-version" content="3.5.0">
+  <meta name="documentation-template-version" content="3.4.3">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Documentation</title>
@@ -142,38 +142,26 @@ These 26 files plus the empty `assets/` directory are the complete initial resul
 - Do not continue if a pinned package, required file, or license cannot be obtained and verified through an approved source.
 - Perform one-time acquisition outside the documentation root and target repository. Cleanup is part of the operation even when acquisition or validation fails.
 - Do not finish while a temporary directory, `node_modules`, package manifest, lock file, downloaded archive, or validation-tool installation created by this task still exists.
-- During initial bootstrap, create only `index.html` and the resolved `<template-file>`. Additional documentation pages belong to a later, explicit authoring task.
+- During initial bootstrap, create only `index.html` and the supplied `<template-file>`. Additional documentation pages belong to a later, explicit authoring task.
 
-## 🔧 Acquisition preflight
+## 🔧 Capability preflight
 
-Complete this short preflight after Phase 1 and before downloading external files:
+Complete this short preflight before creating output files or downloading packages:
 
-1. Use the recorded documentation root. Inspect only in-scope project policy and any asset workflow already used by that project.
+1. Treat the directory containing `<template-file>` as the documentation root. Inspect only in-scope project policy and any asset workflow already used by that project.
 2. Read the task restrictions first. Choose the first permitted vendor acquisition route below and a permitted method for the pinned template-license download; never probe a forbidden tool.
 3. Check only the capabilities required by those choices. Do not install a package manager or validation tool merely for this bootstrap.
-4. Resolve every remaining write destination before external acquisition. Every output must be beneath the documentation root and every disposable acquisition artifact beneath one recorded OS-temporary staging root. An established repository asset workflow may use only its existing managed locations. Do not use a repository-scoped patch or edit helper to write into an external target because it may redirect relative paths to its workspace.
+4. Resolve planned write destinations before writing. Every output must be beneath the documentation root and every disposable acquisition artifact beneath one recorded OS-temporary staging root. An established repository asset workflow may use only its existing managed locations. Do not use a repository-scoped patch or edit helper to write into an external target because it may redirect relative paths to its workspace.
 5. Record how the host's guaranteed-cleanup mechanism will delete the staging root on success or failure and how pinned inputs and copied outputs will be verified.
 
-This preflight must not change the verified Phase 1 files and must leave no configuration, downloads, or installed tools. Once a route is selected, execute it without exploring the other routes.
+This preflight is read-only and must leave no files, configuration, downloads, or installed tools. Once a route is selected, execute it without exploring the other routes.
 
 ## 🚀 Bootstrap sequence
 
-1. Use the recorded input mode, `<template-file>`, and `<documentation-root>`. For file input, retain the supplied template unchanged. For inline input, reserve `Documentation.html`; Phase 1 creates it from the canonical shell rather than copying this complete instruction source.
-2. Create the documentation root when needed, then create its `assets`, `documentation/css`, `documentation/js`, `vendor/css`, `vendor/css/fonts`, `vendor/js`, and `vendor/licenses` directories. Leave `assets` empty during bootstrap; do not invent sample images.
+1. Keep this file at the documentation root under its original `<template-file>` name.
+2. Create the `assets`, `documentation/css`, `documentation/js`, `vendor/css`, `vendor/css/fonts`, `vendor/js`, and `vendor/licenses` directories shown above. Leave `assets` empty during bootstrap; do not invent sample images.
 3. **Phase 1 — materialize embedded artifacts directly at their final destinations:**
-   - Create each project-owned `documentation.*` file and `THIRD-PARTY-NOTICES.md` from its `File payload` block.
-   - Resolve `<template-file>` in `documentation.pages.js`.
-   - Compare every complete resolved `File payload` with its destination after normalizing line endings.
-   - After that comparison, customize only `brand` and `brandIcon` in `documentation/js/documentation.pages.js` when a real project identity is already available. Otherwise retain the neutral identity; never invent one. Keep exactly the two supplied page entries and do not invent online links.
-   - For inline input, create `<template-file>` from `Canonical page shell` and replace its embedded Markdown with exactly:
-
-     ```markdown
-     # Documentation page template
-
-     Copy this page to create another documentation page, then replace only its embedded Markdown.
-     ```
-
-   - Copy `<template-file>` to `index.html` and replace only its embedded Markdown with exactly:
+   - Copy `<template-file>` to `index.html` and replace only its embedded Markdown with the deliberately minimal content shown below:
 
      ```markdown
      # Documentation overview
@@ -185,18 +173,20 @@ This preflight must not change the verified Phase 1 files and must leave no conf
      <div data-documentation-toc></div>
      ```
 
-   - Confirm `<template-file>` and `index.html` use the required shell and that every Phase 1 destination is present and complete.
+   - Create each project-owned `documentation.*` file and `THIRD-PARTY-NOTICES.md` from its `File payload` block.
+   - Resolve `<template-file>` in `documentation.pages.js`.
+   - Compare every complete resolved `File payload` with its destination after normalizing line endings.
+   - After that comparison, customize only `brand` and `brandIcon` in `documentation/js/documentation.pages.js` when a real project identity is already available. Otherwise retain the neutral identity; never invent one. Keep exactly the two supplied page entries and do not invent online links.
    - Do not put these artifacts in acquisition staging or defer them for a combined copy.
-4. Complete and verify Phase 1 before inspecting acquisition capabilities or project asset workflows.
-5. Complete `Acquisition preflight`.
-6. **Phase 2 — acquire external artifacts with the selected methods:**
-   - Follow the route selected during acquisition preflight. Do not search outside the target project or create a permanent asset workflow only for this bootstrap.
+4. Complete and verify Phase 1 before starting external acquisition.
+5. **Phase 2 — acquire external artifacts with the selected methods:**
+   - Follow the route selected during capability preflight. Do not search outside the target project or create a permanent asset workflow only for this bootstrap.
    - Create one unique system-temporary staging directory outside the target repository for the template license and every disposable vendor acquisition. An established repository asset workflow may use its existing managed locations.
    - Acquire the pinned template license with the permitted download method and the vendor packages with the selected vendor route.
    - Materialize `documentation-template.LICENSE.txt` as specified below, copy only the canonical vendor files to their final destinations, and verify every copied vendor file against its acquired source.
    - Remove the task-created temporary directory in guaranteed cleanup.
-7. Perform every check in `Static validation checklist`, including exact file-set and cleanup checks.
-8. Stop after the minimal two-page shell passes. Documentation authoring is a separate task.
+6. Perform every check in `Static validation checklist`, including exact file-set and cleanup checks.
+7. Stop after the minimal two-page shell passes. Documentation authoring is a separate task.
 
 ## 📥 Materialize template license
 
@@ -206,7 +196,7 @@ Replace only `<year>` and `<copyright holders>` with the live `documentation-tem
 
 ## 📦 Materialize pinned vendor packages
 
-Use the approved method selected during acquisition preflight. Reuse a repository asset workflow only when one already exists and is intended to remain. For a one-time bootstrap with no established workflow, use unique system-temporary staging and leave no acquisition state in the repository. Do not mix versions or leave runtime references to the acquisition source. The canonical destination mapping below is the contract.
+Use the approved method selected during capability preflight. Reuse a repository asset workflow only when one already exists and is intended to remain. For a one-time bootstrap with no established workflow, use unique system-temporary staging and leave no acquisition state in the repository. Do not mix versions or leave runtime references to the acquisition source. The canonical destination mapping below is the contract.
 
 ### Fast route selector
 
@@ -1178,8 +1168,7 @@ The project-owned `documentation.*` files remain visibly distinct from these ven
 
 - Confirm the documentation root contains exactly the required result and exactly two HTML files: `index.html` and `<template-file>`.
 - Confirm the root-level `assets/` directory exists and is empty during initial bootstrap.
-- Confirm both HTML files retain the required shell outside `documentation-markdown`, including exactly one local stylesheet link, one local loader script, and one live `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta element with unchanged values.
-- Confirm file input leaves `<template-file>` unchanged and inline input gives it exactly the specified minimal template Markdown.
+- Confirm both HTML files retain the supplied shell outside `documentation-markdown`, including exactly one local stylesheet link, one local loader script, and one live `documentation-template-author`, `documentation-template-source`, `documentation-template-license`, `documentation-template-license-year`, and `documentation-template-version` meta element with unchanged values.
 - Confirm `index.html` contains exactly the specified minimal Markdown and one `data-documentation-toc` element, with no second page list.
 - Confirm `documentation.pages.js` registers only `index.html` and `<template-file>`, each exactly once, and both files exist at the documentation root.
 - Confirm `documentation-template.LICENSE.txt` equals the verified SPDX source after only the two required replacements and contains neither placeholder.
@@ -1249,7 +1238,7 @@ Other local assets can use the same relative path pattern when they should be op
 [Download the reference PDF](./assets/reference.pdf)
 ```
 
-For file input, these compact blocks in the supplied `<template-file>` are intentional syntax-highlighting smoke tests for common application and automation documentation:
+These compact blocks are intentional syntax-highlighting smoke tests for common application and automation documentation:
 
 ```csharp
 Console.WriteLine("Documentation is ready.");
@@ -1283,7 +1272,7 @@ printf '%s\n' "Documentation is ready."
 
 **Built-in Mermaid smoke test**
 
-For file input, this small diagram is intentionally part of the supplied `<template-file>`, so that shell includes a ready Mermaid example without creating a sample content page:
+This small diagram is intentionally part of `<template-file>`, so the generated shell includes a ready Mermaid example without creating a sample content page:
 
 ```mermaid
 flowchart LR
