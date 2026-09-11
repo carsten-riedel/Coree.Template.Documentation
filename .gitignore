@@ -3,4 +3,4 @@
 !/src/releases/*/*.html
 !/src/releases/*/workspace/
 /src/releases/*/workspace/*
-!/src/releases/*/workspace/Documentation.html
+!/src/releases/*/workspace/DocShell.html

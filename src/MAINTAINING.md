@@ -53,7 +53,7 @@ Each product change receives a version bump before a test folder is built.
 ## Build and test
 
 `./buildtestingfolder.ps1` reads the live version, creates the versioned release
-baseline under `./releases/<version>/workspace/Documentation.html`, verifies it
+baseline under `./releases/<version>/workspace/DocShell.html`, verifies it
 by SHA-256, and writes an ignored `prompt.md` containing the artifact's absolute
 path. The baseline is committed so older product versions remain reproducible.
 Prompts and files materialized by test agents remain ignored. The

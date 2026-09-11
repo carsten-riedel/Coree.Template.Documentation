@@ -1,6 +1,6 @@
-# Coree.Template.Documentation
+# DocShell
 
-A single-file, AI-optimized template for portable static documentation.
+DocShell is a single-file, AI-optimized template for portable static documentation.
 
 ## Why use it?
 
@@ -163,7 +163,7 @@ therefore a verified capability list, not an invented historical reconstruction.
 
 ## Getting started
 
-The template is available in [`src/DocTemplate.html`](src/DocTemplate.html).
+The DocShell source is available in [`src/DocTemplate.html`](src/DocTemplate.html).
 It contains the bootstrap instructions and embedded file payloads for creating
 the documentation site. Follow those instructions to generate the required
 local assets before viewing the finished site in a browser.
@@ -172,7 +172,7 @@ local assets before viewing the finished site in a browser.
 
 Run `src/buildtestingfolder.ps1` to read the template version from the HTML
 metadata and create the tracked release baseline at
-`src/releases/<version>/workspace/Documentation.html`. It also writes a
+`src/releases/<version>/workspace/DocShell.html`. It also writes a
 copy-ready `src/releases/<version>/prompt.md` containing the artifact's absolute
 path. Prompts and materialized test output remain local and ignored by Git.
 

@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$FileName = 'Documentation.html'
+    [string]$FileName = 'DocShell.html'
 )
 
 Set-StrictMode -Version Latest
@@ -61,7 +61,7 @@ if (-not $versionDirectory.StartsWith($releasePrefix, [System.StringComparison]:
 }
 
 $baseName = [System.IO.Path]::GetFileNameWithoutExtension($FileName)
-$isReleaseBaseline = $FileName -ieq 'Documentation.html'
+$isReleaseBaseline = $FileName -ieq 'DocShell.html'
 $workspaceName = if ($isReleaseBaseline) { 'workspace' } else { "workspace-$baseName" }
 $workspaceDirectory = Join-Path $versionDirectory $workspaceName
 New-Item -ItemType Directory -Path $workspaceDirectory -Force | Out-Null
