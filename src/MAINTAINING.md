@@ -60,6 +60,22 @@ Prompts and files materialized by test agents remain ignored. The
 `-FileName Docs.html` option creates an isolated `workspace-Docs` test for an
 alternative initial name.
 
+## Release validation
+
+The product's bootstrap contract uses static validation only. Browser checks
+belong to template release testing and are performed only when suitable local
+`file:` access is already available:
+
+- Verify navigation, generated Contents, active-page state, and stable layout at
+  desktop and mobile widths.
+- Verify light and dark colors, local icons, syntax highlighting, and copy-button
+  behavior, including first-line and horizontal-scroll edge cases.
+- Verify Mermaid rendering and an error-free browser console without networking.
+- Verify A4 and Letter print layouts with background graphics disabled.
+
+Record unavailable interactive checks instead of installing browser automation
+for them.
+
 ## Commits
 
 A coherent, verified product change is committed and pushed with its release
