@@ -26,12 +26,12 @@ if (-not $headMatch.Success) {
 $versionMetaMatches = @(
     [regex]::Matches($headMatch.Groups['content'].Value, '(?is)<meta\b[^>]*>') |
         Where-Object {
-            $_.Value -match '(?i)\bname\s*=\s*["'']documentation-template-version["'']'
+            $_.Value -match '(?i)\bname\s*=\s*["'']docshell-version["'']'
         }
 )
 
 if ($versionMetaMatches.Count -ne 1) {
-    throw "Expected exactly one documentation-template-version meta element in the live <head>; found $($versionMetaMatches.Count)."
+    throw "Expected exactly one docshell-version meta element in the live <head>; found $($versionMetaMatches.Count)."
 }
 
 $contentMatch = [regex]::Match(
@@ -39,7 +39,7 @@ $contentMatch = [regex]::Match(
     '(?i)\bcontent\s*=\s*["''](?<version>[^"'']+)["'']'
 )
 if (-not $contentMatch.Success) {
-    throw 'The documentation-template-version meta element has no content value.'
+    throw 'The docshell-version meta element has no content value.'
 }
 
 $templateVersion = $contentMatch.Groups['version'].Value

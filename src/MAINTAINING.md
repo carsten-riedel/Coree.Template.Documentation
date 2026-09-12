@@ -41,7 +41,7 @@ consequences across the same areas while keeping the change small.
 
 ## Versioning
 
-The live `documentation-template-version` meta value is the product version. Its
+The live `docshell-version` meta value is the product version. Its
 value stays synchronized with the canonical page shell.
 
 - Patch: corrections and instruction refinements.
